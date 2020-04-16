@@ -52,6 +52,22 @@ app.get('/weather', (req, res) => {
 
 
 
+app.get('/help/*', (req, res) =>{
+    res.render('404',{
+        title: '404',
+        name: 'Thiago Santos',
+        errorText: 'Artigo de ajuda não encontrado'        
+    })
+})
+
+app.get('*', (req, res) =>{
+    res.render('404',{
+        title: '404',
+        name: 'Thiago Santos',
+        errorText: 'Pagina não encontrada'        
+    })
+})
+
 app.listen(3000, ()=>{
     console.log('Server está no ar na porta 3000')
 })
