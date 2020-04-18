@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 
 <html>
-
     <head>
         <title>{{title}}</title>
         <link rel="icon" href="/img/weather.png">
-        <link rel="stylesheet" href="/css/styles.css">
-        <script src="/js/app.js"></script>
+        <link rel="stylesheet" href="/css/styles.css">       
     </head>
     <body>
         <div class="main-content">
             {{>header}}
             <p>Use esse site para verificar o clima</p>
+
+            <form>
+                <input placeholder="Localização">
+                <button>Pesquisar</button> 
+            </form>
+
+            <p id="message-1"></p>
+            <p id="message-2"></p>
         </div>        
         {{>footer}}
-    </body>
 
+         <script src="/js/app.js"></script>
+    </body>
 </html>

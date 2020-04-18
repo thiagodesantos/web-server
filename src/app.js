@@ -2,6 +2,10 @@ const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
 
+//Dependencias internas
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
+
 const app = express()
 
 // definição de path para o express config
@@ -42,14 +46,26 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    res.send({
-        forecast: 'Sol',
-        latitude: 2323,
-        longitude: -3434,
-        location: 'Rio de Janeiro'
-    }) 
-})
 
+    if(!req.query.address)
+        return res.send({ error: 'É necessário informar um endereço!' })    
+
+    geocode(req.query.address, (error, {latitude, longitude, location} = {})=>{
+        if(error)
+            return res.send({ error })
+      
+        forecast(latitude, longitude, (error, forecastdata) => {      
+            if(error)
+                return res.send({ error })
+
+            res.send({
+                forecast: forecastdata,       
+                location,
+                address: req.query.address
+            })
+        })        
+    })     
+})
 
 
 app.get('/help/*', (req, res) =>{
