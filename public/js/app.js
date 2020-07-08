@@ -1,5 +1,3 @@
-console.log('Client Side JavaScript Carregado')
-
 const climaform = document.querySelector('form')
 const busca = document.querySelector('input')
 const primeiraMensagem = document.querySelector('#message-1')
@@ -13,7 +11,7 @@ climaform.addEventListener('submit', (e) =>{
     primeiraMensagem.textContent = 'Carregando...'
     segundaMensagem.textContent = ''
 
-    fetch('http://localhost:3000/weather?address=' + encodeURIComponent(localizacao)).then((response)=>{
+    fetch('/weather?address=' + encodeURIComponent(localizacao)).then((response)=>{
         response.json().then((data)=>{
             if(data.error)
                 primeiraMensagem.textContent = data.error
